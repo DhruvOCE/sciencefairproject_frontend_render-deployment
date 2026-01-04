@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>About — Parkinson's & Alzheimer's detectors</title>
+        <style>
+            :root {
+                --accent: #2b7cff;
+                --muted: #666;
+                --bg: #f7f9fc;
+            }
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                font-family: Inter, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background: var(--bg);
+                color: #111;
+            }
+            header {
+                background: #fff;
+                padding: 18px 28px;
+                box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .brand {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+            }
+            .brand h1 {
+                font-size: 18px;
+                margin: 0;
+            }
+            nav a {
+                margin-left: 12px;
+                color: var(--muted);
+                text-decoration: none;
+            }
+            main {
+                max-width: 1100px;
+                margin: 28px auto;
+                padding: 20px;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+            }
+            h2 {
+                margin-top: 0;
+            }
+            p.lead {
+                color: var(--muted);
+                margin-top: 4px;
+            }
+            footer {
+                max-width: 1100px;
+                margin: 20px auto;
+                color: var(--muted);
+                font-size: 13px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="brand">
+                <h1>About Parkinson's & Alzheimer's detectors</h1>
+            </div>
+            <nav>
+                <a href="/"> Back to Home</a>
+                <a href="#">About</a>
+            </nav>
+        </header>
+
+        <main>
+            <h2>About this project</h2>
+            <p class="lead">A simple explanation of what this project does and who we are.</p>
+
+            <p>
+                We're building lightweight AI models that analyze hand-drawn spirals and circles to help
+                detect motor symptoms associated with Parkinson's and Alzheimer's disease and early cognitive changes.
+                This project is an educational effort — we focus on data collection, model training, and
+                trying to produce clear visualizations to help understand model behavior.
+            </p>
+
+            <h3>What we collect</h3>
+            <p>
+                The dataset contains scanned or photographed drawings (spirals and circles) from healthy
+                participants and patients. These are preprocessed, then used to train simple classifiers
+                and exploratory visual analytics. We also are trying to experiment with trying to use our alezheimers model as it only excepts csv data
+            </p>
+
+            <h3>Who made this</h3>
+            <p>
+                This is an educational science-fair style project created by two middle-school students.
+                It's intended for learning and demonstration only — not for real clinical diagnosis.
+            </p>
+
+            <h3>Credits & Links</h3>
+            <p>
+                See the repository for code, data preprocessing steps, and model details:
+                <a href="https://github.com/DhruvOCE/sciencefairproject/tree/main"></a>
+            </p>
+        </main>
+
+        <footer>
+            <p>Created only for curiosity and learning — please don't fully trust this website</p>
+        </footer>
+    </body>
+</html>
