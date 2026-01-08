@@ -148,9 +148,9 @@
 			});
 		const ENDPOINTS={
 
-			'circle':'https://DhruvW/parkinsons-circle-space-real.hf.space/predict',
-			'spiral':"https://DhruvW/parkinsons-spiral-space-real.hf.space/predict",
-			'meander':'https://DhruvW/parkinsons-meander-space-real.hf.space/predict'
+			'circle':'https://DhruvW-parkinsons-circle-space-real.hf.space/predict',
+			'spiral':"https://DhruvW-parkinsons-spiral-space-real.hf.space/predict",
+			'meander':'https://DhruvW-parkinsons-meander-space-real.hf.space/predict'
 		};
 		predictBtn.addEventListener('click', async ()=>{
 			const file = fileInput.files && fileInput.files[0];
@@ -173,15 +173,16 @@
 					method: 'POST',
 					body: fd
 				});
-				if (!response.ok){
-					throw ne Error('server responded with ${response.status}');
-				const data = await response.json();
-				result.textContent = JSON.stringify(data, null, 2);
+			if (!response.ok){
+				throw new Error(`server responded with ${response.status}`);
+			}
+			const data = await response.json();
+			result.textContent = JSON.stringify(data, null, 2);
 				// update history
-				const item = document.createElement('div');
-				item.textContent = `${new Date().toLocaleString()}: ${data.prediction} (score: ${data.score?.toFixed ? data.score.toFixed(3) : data.score})`;
-				if(historyEl.textContent === 'No predictions yet.') historyEl.textContent = '';
-				historyEl.prepend(item);
+			const item = document.createElement('div');
+			item.textContent = `${new Date().toLocaleString()}: ${data.prediction} (score: ${data.score?.toFixed ? data.score.toFixed(3) : data.score})`;
+			if(historyEl.textContent === 'No predictions yet.') historyEl.textContent = '';
+			historyEl.prepend(item);
 			}catch(err){
 				result.textContent = 'Prediction error: '+err.message;
 			}
