@@ -173,6 +173,8 @@
 					method: 'POST',
 					body: fd
 				});
+				if (!response.ok){
+					throw ne Error('server responded with ${response.status}');
 				const data = await response.json();
 				result.textContent = JSON.stringify(data, null, 2);
 				// update history
