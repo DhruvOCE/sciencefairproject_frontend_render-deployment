@@ -148,7 +148,7 @@
         drawCanvas.addEventListener("mousemove", (e) => {
             if (!drawing2) return;
             const rect = drawCanvas.getBoundingClientRect();
-            ctx2.lineWidth = 4;
+            ctx2.lineWidth = 6;
             ctx2.lineCap = "round";
             ctx2.strokeStyle = "black";
             ctx2.lineTo(e.clientX - rect.left, e.clientY - rect.top);
