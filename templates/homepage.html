@@ -1,269 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Parkinsons spiral, circles etc. detector and alzheimers detector</title>
-    <style>
-        :root{--accent:#2b7cff;--muted:#666;--bg:#f7f9fc}
-        body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;color:black}
-        header{background:#09ef87;padding:18px 28px;box-shadow:0 1px 6px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between}
-        .brand{display:flex;gap:12px;align-items:center}
-        .brand h1{font-size:18px;margin:0}
-        nav a{margin-left:12px;color:var(--muted);text-decoration:none}
-        main{max-width:1100px;margin:28px auto;padding:20px}
-        .grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
-        .card{background:#07748adb;border-radius:8px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-        .muted{color:black;font-size:16px;font-weight:bold}
-        textarea.code{width:100%;height:280px;font-family:monospace;font-size:13px;padding:12px;border:1px solid #e6eef9;border-radius:6px}
-        .controls{display:flex;gap:10px;align-items:center;margin-top:10px}
-        button.primary{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
-        button.ghost{background:#f3f6fb;border:1px solid #e6eef9;padding:8px 12px;border-radius:6px;cursor:pointer}
-        .preview{display:flex;flex-direction:column;gap:10px;align-items:center}
-        .preview img{max-width:100%;max-height:360px;border-radius:6px;border:1px solid #e9eef6}
-        input[type=file]{display:none}
-        label.upload-btn{background:#fff;border:1px dashed #cfe3ff;padding:10px 12px;border-radius:6px;color:var(--muted);cursor:pointer}
-        .result{white-space:pre-wrap;background:#0f1724;color:#dbeafe;padding:12px;border-radius:6px;min-height:80px}
-        footer{max-width:1100px;margin:20px auto;color:var(--muted);font-size:13px}
-
-        /* Modal */
-        #canvasModal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-        #canvasModal .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-    </style>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Parkinsons spiral, circles etc. detector and alzheimers detector</title>
+	<style>
+		:root{--accent:#2b7cff;--muted:#666;--bg:#f7f9fc}
+		body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;color: "black"}
+		header{background:#09ef87;padding:18px 28px;box-shadow:0 1px 6px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between}
+		.brand{display:flex;gap:12px;align-items:center}
+		.brand h1{font-size:18px;margin:0}
+		nav a{margin-left:12px;color:var(--muted);text-decoration:none}
+		main{max-width:1100px;margin:28px auto;padding:20px}
+		.grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
+		.card{background:#07748adb;border-radius:8px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+		.muted{color:"black";font-size:14px}
+		textarea.code{width:100%;height:280px;font-family:monospace;font-size:13px;padding:12px;border:1px solid #e6eef9;border-radius:6px}
+		.controls{display:flex;gap:10px;align-items:center;margin-top:10px}
+		button.primary{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
+		button.ghost{background:#f3f6fb;border:1px solid #e6eef9;padding:8px 12px;border-radius:6px;cursor:pointer}
+		.preview{display:flex;flex-direction:column;gap:10px;align-items:center}
+		.preview img{max-width:100%;max-height:360px;border-radius:6px;border:1px solid #e9eef6}
+		input[type=file]{display:none}
+		label.upload-btn{background:#fff;border:1px dashed #cfe3ff;padding:10px 12px;border-radius:6px;color:var(--muted);cursor:pointer}
+		.result{white-space:pre-wrap;background:#0f1724;color:#dbeafe;padding:12px;border-radius:6px;min-height:80px}
+		footer{max-width:1100px;margin:20px auto;color:var(--muted);font-size:13px}
+	</style>
 </head>
-
 <body>
-    <header>
-        <div class="brand">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
-                <circle cx="12" cy="12" r="10" fill="#2b7cff"/>
-                <path d="M7 13c1.333-2 4-4 7-4" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <div>
-                <h1>Parksinsons and Alzheimers drawing detectors</h1>
-                <div class="muted">Please do not fully trust this website. This is just a proof to concept science fair project and should not be used for actual medical diagnosis</div>
-            </div>
-        </div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="/about">About Us</a>
-        </nav>
-    </header>
+	<header>
+		<div class="brand">
+			<svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+				<circle cx="12" cy="12" r="10" fill="#2b7cff"/>
+				<path d="M7 13c1.333-2 4-4 7-4" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+			<div>
+				<h1>Parksinsons and Alzheimers drawing detectors</h1>
+				<div class="muted">Upload a spiral, circle or meander(for now)</div>
+			</div>
+		</div>
+		<nav>
+			<a href="#">Home</a>
+			<a href="/about">About Us</a>
+		</nav>
+	</header>
 
-    <main>
-        <div class="grid">
-            <section class="card">
-                <h2>Upload or Draw a Spiral, Meander, or Circle (for now)</h2>
-                <p class="muted">Choose a shape, draw it, or upload an image.</p>
+	<main>
+		<div class="grid">
+			<section class="card">
+				<h2>Upload spiral or circle image for prediction</h2>
+				<p class="muted">Select a image that contains a spiral or circle; when you press Predict the image will be sent to the server and the HandPD model will run.</p>
+				
+				<div class="preview">
+					<button id="uploadCircleBtn" class="uploadBtn">Upload Circle Image</button>
+					<button id="uploadSpiralBtn" class="uploadBtn">Upload Spiral Image</button>
+					<button id="uploadMeanderBtn" class="uploadBtn">Upload Meander Image</button>
+					<label for="fileInput" class="upload-btn">Choose image</label>
+					<input id="fileInput" type="file" accept="image/*" />
+					<div id="previewWrap" style="width:100%">
+						<img id="preview" src="" alt="Preview" style="display:none" />
+					</div>
 
-                <div class="preview">
-                    <button id="uploadCircleBtn" class="uploadBtn">Draw Circle</button>
-                    <button id="uploadSpiralBtn" class="uploadBtn">Draw Spiral</button>
-                    <button id="uploadMeanderBtn" class="uploadBtn">Draw Meander</button>
+					<div style="width:100%;display:flex;gap:8px">
+						<button id="predictBtn" class="primary" style="flex:1">Predict</button>
+						<button id="removeBtn" class="ghost" style="flex:1">Remove</button>
+					</div>
+				</div>
+				
 
-                    <label for="fileInput" class="upload-btn">Choose image</label>
-                    <input id="fileInput" type="file" accept="image/*" />
+				<h3 style="margin-top:18px">Result</h3>
+				<div id="result" class="result">No result yet.</div>
 
-                    <div id="previewWrap" style="width:100%">
-                        <img id="preview" src="" alt="Preview" style="display:none" />
-                    </div>
+				<h3 style="margin-top:18px">Notes</h3>
+				<ul class="muted">
+					<li>Server endpoint expected: <code>/predict</code> (POST multipart/form-data; form field name: <code>file</code>).</li>
+					<li>Backend will return JSON like: <code>{"prediction": "healthy"|"patient", "score": 0.92, "explanation and warning"}</code>.</li>
+				</ul>
+			</section>
 
-                    <div style="width:100%;display:flex;gap:8px">
-                        <button id="predictBtn" class="primary" style="flex:1" disabled>Predict</button>
-                        <button id="removeBtn" class="ghost" style="flex:1">Remove</button>
-                    </div>
-                </div>
+			<aside class="card">
+				<h2>Recent uploads</h2>
+				<p class="muted">Temporary list of recent predictions (keeps only current session results).</p>
+				<div id="history" class="muted">No predictions yet.</div>
+			</aside>
+		</div>
+	</main>
 
-                <h3 style="margin-top:18px">Result</h3>
-                <div id="result" class="result">No result yet.</div>
-            </section>
+	
 
-            <aside class="card">
-                <h2>Recent uploads</h2>
-                <p class="muted">Temporary list of recent predictions.</p>
-                <div id="history" class="muted">No predictions yet.</div>
-            </aside>
-        </div>
-    </main>
+	<script>
+		// Simple front-end behaviour: preview image and POST to /predict to run HandPD model
+		const fileInput = document.getElementById('fileInput');
+		const uploadCircleBtn=document.getElementById('uploadCircleBtn');
+		const uploadSpiralBtn=document.getElementById('uploadSpiralBtn');
+		const uploadMeanderBtn=document.getElementById('uploadMeanderBtn');
+		const preview = document.getElementById('preview');
+		const previewWrap = document.getElementById('previewWrap');
+		const predictBtn = document.getElementById('predictBtn');
+		const removeBtn = document.getElementById('removeBtn');
+		const result = document.getElementById('result');
+		const historyEl = document.getElementById('history');
+		let selectedType = null;
+		const typeBadge = document.createElement('div');
+		typeBadge.style.fontSize='12px';
+		typeBadge.style.color='#2b7cff';
+		typeBadge.style.marginTop='6px';
+		previewWrap.appendChild(typeBadge);
 
-    <!-- Canvas Modal -->
-    <div id="canvasModal">
-        <div class="modal-content">
-            <h3>Draw your shape</h3>
-            <canvas id="drawCanvas" width="300" height="300"
-                    style="border:1px solid #ccc; background:white; border-radius:6px;">
-            </canvas>
 
-            <div style="margin-top:12px; display:flex; gap:10px; justify-content:center;">
-                <button id="clearCanvasBtn" class="ghost">Clear</button>
-                <button id="cancelCanvasBtn" class="ghost">Cancel</button>
-                <button id="doneCanvasBtn" class="primary">Done</button>
-            </div>
-        </div>
-    </div>
+		// open file dialog when clicking the styled label
+			document.querySelector('.upload-btn').addEventListener('click', ()=>{ 
+				document.getElementById('fileInput').click(); 
+			});
 
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const uploadCircleBtn=document.getElementById('uploadCircleBtn');
-        const uploadSpiralBtn=document.getElementById('uploadSpiralBtn');
-        const uploadMeanderBtn=document.getElementById('uploadMeanderBtn');
-        const preview = document.getElementById('preview');
-        const previewWrap = document.getElementById('previewWrap');
-        const predictBtn = document.getElementById('predictBtn');
-        const removeBtn = document.getElementById('removeBtn');
-        const result = document.getElementById('result');
-        const historyEl = document.getElementById('history');
+			fileInput.addEventListener('change', e => {
+				const file = e.target.files && e.target.files[0];
+				if (!file) return;
+				const url = URL.createObjectURL(file);
+				preview.src = url;
+				preview.style.display = 'block';
+				predictBtn.disabled = false;
+				if (!selectedType) typeBadge.textContent = 'Type: (unspecified)';
+			});
 
-        let selectedType = null;
+			removeBtn.addEventListener('click', (e)=>{
+				fileInput.value = '';
+				preview.src = '';
+				preview.style.display = 'none';
+				selectedType = null;
+				typeBadge.textContent = '';
+				predictBtn.disabled = true;
+			});
+			uploadCircleBtn.addEventListener('click',()=>{
+				selectedType='circle';
+				typeBadge.textContent='Type: Circle';
+				fileInput.click();
+			});
+			uploadSpiralBtn.addEventListener('click',()=>{
+				selectedType='spiral';
+				typeBadge.textContent='Type: Spiral';
+				fileInput.click();
+			});
+			uploadMeanderBtn.addEventListener('click',()=>{
+				selectedType='meander';
+				typeBadge.textContent='Type: Meander';
+				fileInput.click();
+			});
+		const ENDPOINTS={
 
-        const typeBadge = document.createElement('div');
-        typeBadge.style.fontSize='12px';
-        typeBadge.style.color='#2b7cff';
-        typeBadge.style.marginTop='6px';
-        previewWrap.appendChild(typeBadge);
-
-        // Modal + Canvas
-        const canvasModal = document.getElementById("canvasModal");
-        const drawCanvas = document.getElementById("drawCanvas");
-        const ctx2 = drawCanvas.getContext("2d");
-        let drawing2 = false;
-
-        drawCanvas.addEventListener("mousedown", () => drawing2 = true);
-        drawCanvas.addEventListener("mouseup", () => drawing2 = false);
-        drawCanvas.addEventListener("mouseleave", () => drawing2 = false);
-
-        drawCanvas.addEventListener("mousemove", (e) => {
-            if (!drawing2) return;
-            const rect = drawCanvas.getBoundingClientRect();
-            ctx2.lineWidth = 6;
-            ctx2.lineCap = "round";
-            ctx2.strokeStyle = "black";
-            ctx2.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-            ctx2.stroke();
-            ctx2.beginPath();
-            ctx2.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-        });
-
-        document.getElementById("clearCanvasBtn").addEventListener("click", () => {
-            ctx2.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-        });
-
-        document.getElementById("cancelCanvasBtn").addEventListener("click", () => {
-            canvasModal.style.display = "none";
-            ctx2.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-        });
-
-        document.getElementById("doneCanvasBtn").addEventListener("click", () => {
-            drawCanvas.toBlob(blob => {
-                const file = new File([blob], "drawing.png", { type: "image/png" });
-
-                const dt = new DataTransfer();
-                dt.items.add(file);
-                fileInput.files = dt.files;
-
-                preview.src = URL.createObjectURL(file);
-                preview.style.display = "block";
-                predictBtn.disabled = false;
-
-                canvasModal.style.display = "none";
-                ctx2.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-            });
-        });
-
-        // Open canvas modal for each type
-        uploadCircleBtn.addEventListener('click',()=>{
-            selectedType='circle';
-            typeBadge.textContent='Type: Circle';
-            canvasModal.style.display = "flex";
-        });
-        uploadSpiralBtn.addEventListener('click',()=>{
-            selectedType='spiral';
-            typeBadge.textContent='Type: Spiral';
-            canvasModal.style.display = "flex";
-        });
-        uploadMeanderBtn.addEventListener('click',()=>{
-            selectedType='meander';
-            typeBadge.textContent='Type: Meander';
-            canvasModal.style.display = "flex";
-        });
-
-        // Upload image
-        document.querySelector('.upload-btn').addEventListener('click', ()=>{ 
-            fileInput.click(); 
-        });
-
-        fileInput.addEventListener('change', e => {
-            const file = e.target.files && e.target.files[0];
-            if (!file) return;
-            const url = URL.createObjectURL(file);
-            preview.src = url;
-            preview.style.display = 'block';
-            predictBtn.disabled = false;
-            if (!selectedType) typeBadge.textContent = 'Type: (unspecified)';
-        });
-
-        removeBtn.addEventListener('click', ()=>{
-            fileInput.value = '';
-            preview.src = '';
-            preview.style.display = 'none';
-            selectedType = null;
-            typeBadge.textContent = '';
-            predictBtn.disabled = true;
-        });
-
-        const ENDPOINTS={
-            'circle':'https://DhruvW-parkinsons-circle-space-real.hf.space/predict',
-            'spiral':"https://DhruvW-parkinsons-spiral-space-real.hf.space/predict",
-            'meander':'https://DhruvW-parkinsons-meander-space-real.hf.space/predict'
-        };
-
-        predictBtn.addEventListener('click', async ()=>{
-            const file = fileInput.files && fileInput.files[0];
-            if (!file) { alert('Choose or draw a file first'); return; }
-            if (!selectedType) { alert('Select Circle, Spiral, or Meander first'); return; }
-
-            const endpoint=ENDPOINTS[selectedType];
-            if (!endpoint) { alert('No endpoint configured for this type'); return; }
-
-            result.textContent = 'Predicting...';
-
-            const fd = new FormData();
-            fd.append('file', file);
-            fd.append('type', selectedType);
-
-            try{
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    body: fd
-                });
-                if (!response.ok){
-                    throw new Error(`server responded with ${response.status}`);
-                }
-                const data = await response.json();
-                result.textContent = JSON.stringify(data, null, 2);
-
-                const item = document.createElement('div');
-                item.textContent = `${new Date().toLocaleString()}: ${data.prediction} (confidence: ${data.confidence})`;
-                if(historyEl.textContent === 'No predictions yet.') historyEl.textContent = '';
-                historyEl.prepend(item);
-
-            }catch(err){
-                result.textContent = 'Prediction error: '+err.message;
-            }
-        });
-    </script>
+			'circle':'https://DhruvW-parkinsons-circle-space-real.hf.space/predict',
+			'spiral':"https://DhruvW-parkinsons-spiral-space-real.hf.space/predict",
+			'meander':'https://DhruvW-parkinsons-meander-space-real.hf.space/predict'
+		};
+		predictBtn.addEventListener('click', async ()=>{
+			const file = fileInput.files && fileInput.files[0];
+			if (!file) { 
+				alert('Choose a file first'); 
+				return; }
+			if (!selectedType) { 
+				alert('Select Circle, Spiral, or Meander first'); 
+				return; }
+			const endpoint=ENDPOINTS[selectedType];
+			if (!endpoint) { 
+				alert('No endpoint configured for this type'); 
+				return; }
+			result.textContent = 'Predicting...';
+				const fd = new FormData();
+				fd.append('file', file);
+				if (selectedType) fd.append('type', selectedType);
+			try{
+				const response = await fetch(endpoint, {
+					method: 'POST',
+					body: fd
+				});
+			if (!response.ok){
+				throw new Error(`server responded with ${response.status}`);
+			}
+			const data = await response.json();
+			result.textContent = JSON.stringify(data, null, 2);
+				// update history
+			const item = document.createElement('div');
+			item.textContent = `${new Date().toLocaleString()}: ${data.prediction} (score: ${data.score?.toFixed ? data.score.toFixed(3) : data.score})`;
+			if(historyEl.textContent === 'No predictions yet.') historyEl.textContent = '';
+			historyEl.prepend(item);
+			}catch(err){
+				result.textContent = 'Prediction error: '+err.message;
+			}
+		});
+	</script>
 </body>
 </html>
