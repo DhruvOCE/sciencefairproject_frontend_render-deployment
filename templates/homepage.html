@@ -5,24 +5,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Parkinsons spiral, circles etc. detector and alzheimers detector</title>
 	<style>
-		:root{--accent:#2b7cff;--muted:#666;--bg:#f7f9fc}
-		body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;color: "black"}
-		header{background:#09ef87;padding:18px 28px;box-shadow:0 1px 6px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between}
-		.brand{display:flex;gap:12px;align-items:center}
-		.brand h1{font-size:18px;margin:0}
+		:root{--primary:#1F6F78;--accent:#2F80ED;--muted:#6B7280;--bg:#E6F4F5;--card:#FFFFFF;border:#E5E7EB;--text:#111827;}
+		body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;color:var(--text);}
+		header{background:var(--primary);padding:18px 28px;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between}
+		.brand{display:flex;gap:14px;align-items:center}
+		.brand h1{font-size:18px;margin:0;color:#FFFFFF;}
+		.brand img{height:44px; width:44px; border-radius:50%;}
+		.brand .muted{  font-size:13px; color:#E6F4F5; }
 		nav a{margin-left:12px;color:var(--muted);text-decoration:none}
+		nav a:hover{ color:var(--accent);}
 		main{max-width:1100px;margin:28px auto;padding:20px}
 		.grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
-		.card{background:#07748adb;border-radius:8px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-		.muted{color:"black";font-size:14px}
+		.card{background:var(--card);border-radius:8px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+		.muted{color:var(--muted);font-size:14px}
 		textarea.code{width:100%;height:280px;font-family:monospace;font-size:13px;padding:12px;border:1px solid #e6eef9;border-radius:6px}
 		.controls{display:flex;gap:10px;align-items:center;margin-top:10px}
 		button.primary{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
-		button.ghost{background:#f3f6fb;border:1px solid #e6eef9;padding:8px 12px;border-radius:6px;cursor:pointer}
+		button.ghost{background:#F9FAFB;border:1px solid var(--border);padding:8px 12px;border-radius:6px;cursor:pointer}
 		.preview{display:flex;flex-direction:column;gap:10px;align-items:center}
 		.preview img{max-width:100%;max-height:360px;border-radius:6px;border:1px solid #e9eef6}
 		input[type=file]{display:none}
-		label.upload-btn{background:#fff;border:1px dashed #cfe3ff;padding:10px 12px;border-radius:6px;color:var(--muted);cursor:pointer}
+		label.upload-btn{background:#FFFFFF;border:1px dashed var(--border);padding:10px 12px;border-radius:6px;color:var(--muted);cursor:pointer}
 		.result{white-space:pre-wrap;background:#0f1724;color:#dbeafe;padding:12px;border-radius:6px;min-height:80px}
 		footer{max-width:1100px;margin:20px auto;color:var(--muted);font-size:13px}
 	</style>
@@ -30,10 +33,7 @@
 <body>
 	<header>
 		<div class="brand">
-			<svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
-				<circle cx="12" cy="12" r="10" fill="#2b7cff"/>
-				<path d="M7 13c1.333-2 4-4 7-4" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
+			<img src=/assets/PdAzlogosciencefair.png" alt="PdAz AI Logo"/>
 			<div>
 				<h1>Parksinsons and Alzheimers drawing detectors</h1>
 				<div class="muted">Upload a spiral, circle or meander(for now)</div>
